@@ -1,11 +1,20 @@
 host:
   web1:
+    ip: 192.168.3.199
+    user: root
+    port: 22
+    password: "root"
+  web2:
     ip: 192.168.1.1
     user: root
     port: 22
-    password:
-
+    password: "s df ad"
 logfile:
-  nginx:
-    path: /var/log/nginx/access.log
-    
+  www_nginx:
+    - path: /var/log/nginx/access.log
+      host: web1
+    - path: /varlog/nginx/error.log
+      host: web2
+  api:
+    - path: /data/logs/api/api.log
+    - host: web2
