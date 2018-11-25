@@ -1,0 +1,11 @@
+host:
+  web1:
+    ip: 192.168.1.1
+    user: root
+    port: 22
+    password:
+
+logfile:
+  nginx:
+    path: /var/log/nginx/access.log
+    
