@@ -1,6 +1,6 @@
 serverconfig:
-  bindaddr: 0.0.0.0
-  listenport: 8088
+  BindAddr: 0.0.0.0
+  ListenPort: 8088
 host:
   web1:
     ip: 192.168.3.199
