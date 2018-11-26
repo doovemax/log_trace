@@ -14,8 +14,8 @@ import (
 )
 
 type ConfigAll struct {
-	Hosts    map[string]module.Host      `yaml:"host"`
-	LogFiles map[string][]module.LogFile `yaml:"logfile"`
+	Hosts   map[string]module.Host      `yaml:"host"`
+	LogFile map[string][]module.LogFile `yaml:"logfile"`
 }
 
 var (
