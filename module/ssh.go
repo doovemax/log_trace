@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"net"
 
+	"github.com/sirupsen/logrus"
+
 	"golang.org/x/crypto/ssh"
 )
 
@@ -49,7 +51,7 @@ func (h *Host) ReadFile(file string, logfile LogFile) (err error) {
 		for stderrread.Scan() {
 			lineerr := stderrread.Text()
 			if lineerr != "" {
-				return
+				logrus.Errorln(err)
 			}
 			for stdoutread.Scan() {
 				logfile.LogTrans <- stdoutread.Bytes()
