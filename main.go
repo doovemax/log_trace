@@ -3,12 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/doovemax/log_trace/module"
+	"strings"
 
 	"golang.org/x/net/websocket"
-
-	"github.com/sirupsen/logrus"
 
 	"github.com/doovemax/log_trace/config"
 )
@@ -23,12 +20,26 @@ func main() {
 	// fmt.Println(err)
 	// http.Handle("/echo", websocket.Handler(echoHandler))
 	// http.Handle("/", http.FileServer(http.Dir(".")))
-	mp := config.Conf.ServerConfig
-	logrus.Info(mp["BindAddr"])
-	logrus.Infoln("Server runing Success at", config.Conf.ServerConfig["BindAddr"], config.Conf.ServerConfig["ListenPort"], "!")
-	http.HandleFunc("/*", websocket.Handler(module.LogSh))
+	// logrus.Infoln("Server runing Success at", config.Conf.ServerConfig["BindAddr"], config.Conf.ServerConfig["ListenPort"], "!")
+	http.Handle("/*", websocket.Handler(LogSh))
 
-	if err := http.ListenAndServe(":"+config.Conf.ServerConfig["ListenPort"], nil); err != nil {
+	if err := http.ListenAndServe(":"+config.Conf.ServerConfig.ListenPort, nil); err != nil {
 		panic("ListenAndServe: " + err.Error())
+	}
+}
+
+func LogSh(ws *websocket.Conn) {
+	url := ws.Request().URL.Path
+	urlSlice := strings.Split(url, "/")
+	if len(urlSlice) != 3 {
+		ws.Write([]byte("url error"))
+		return
+	}
+	// projectName := urlSlice[1]
+	serviceName := urlSlice[2]
+	// logTrans := make(chan []byte, 10000)
+	for ser := range config.Conf.LogFile[serviceName] {
+		fmt.Println(ser)
+
 	}
 }

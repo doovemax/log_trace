@@ -1,6 +1,6 @@
 package module
 
 type ServerConfig struct {
-	ListenPort string `yaml:"ListenPort"`
-	BindAddr   string `yaml:"BindAddr"`
+	ListenPort string `yaml:"listenport"`
+	BindAddr   string `yaml:"bindaddr"`
 }
