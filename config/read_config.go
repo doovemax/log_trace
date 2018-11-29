@@ -6,9 +6,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"wordfrequency/gopkg.in/yaml.v2"
-
 	"github.com/doovemax/log_trace/module"
+	yaml "gopkg.in/yaml.v2"
 
 	"github.com/ogier/pflag"
 )
